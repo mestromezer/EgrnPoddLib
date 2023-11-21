@@ -14,6 +14,19 @@
             "related": ".xml"
           }
         }
+      },
+      "EgrnPoddLib/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "compile": {
+          "bin/placeholder/EgrnPoddLib.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EgrnPoddLib.dll": {}
+        }
       }
     }
   },
@@ -47,11 +60,16 @@
         "newtonsoft.json.nuspec",
         "packageIcon.png"
       ]
+    },
+    "EgrnPoddLib/1.0.0": {
+      "type": "project",
+      "path": "../EgrnPoddLib/EgrnPoddLib.csproj",
+      "msbuildProject": "../EgrnPoddLib/EgrnPoddLib.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Newtonsoft.Json >= 13.0.3"
+      "EgrnPoddLib >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -61,11 +79,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\globa\\Documents\\Самараинфоспутник\\Смев4\\EgrnLib\\EgrnPoddLib\\EgrnPoddLib\\EgrnPoddLib.csproj",
-      "projectName": "EgrnPoddLib",
-      "projectPath": "C:\\Users\\globa\\Documents\\Самараинфоспутник\\Смев4\\EgrnLib\\EgrnPoddLib\\EgrnPoddLib\\EgrnPoddLib.csproj",
+      "projectUniqueName": "C:\\Users\\globa\\Documents\\Самараинфоспутник\\Смев4\\EgrnLib\\EgrnPoddLib\\Test\\Test.csproj",
+      "projectName": "Test",
+      "projectPath": "C:\\Users\\globa\\Documents\\Самараинфоспутник\\Смев4\\EgrnLib\\EgrnPoddLib\\Test\\Test.csproj",
       "packagesPath": "C:\\Users\\globa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\globa\\Documents\\Самараинфоспутник\\Смев4\\EgrnLib\\EgrnPoddLib\\EgrnPoddLib\\obj\\",
+      "outputPath": "C:\\Users\\globa\\Documents\\Самараинфоспутник\\Смев4\\EgrnLib\\EgrnPoddLib\\Test\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -86,7 +104,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\globa\\Documents\\Самараинфоспутник\\Смев4\\EgrnLib\\EgrnPoddLib\\EgrnPoddLib\\EgrnPoddLib.csproj": {
+              "projectPath": "C:\\Users\\globa\\Documents\\Самараинфоспутник\\Смев4\\EgrnLib\\EgrnPoddLib\\EgrnPoddLib\\EgrnPoddLib.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -98,12 +120,6 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
-        "dependencies": {
-          "Newtonsoft.Json": {
-            "target": "Package",
-            "version": "[13.0.3, )"
-          }
-        },
         "imports": [
           "net461",
           "net462",
