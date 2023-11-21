@@ -9,12 +9,6 @@ namespace EgrnPoddLib
     {
         private const string _defaultEndpoint = "http://192.168.1.40:8192";
         private readonly HttpClient _httpClient;
-        /*private string formatAsRequestBody(StringBuilder request)
-        {
-            request.Insert(0, "{\"sql\": {\"sql\": ");
-            request.Append("}}");
-            return request.ToString();
-        }*/
         private HttpClient CreateClient(string? endpoint)
         {
             string endpointAddress = endpoint ?? _defaultEndpoint;
@@ -54,10 +48,7 @@ namespace EgrnPoddLib
 
             using (var responseMessage = await _httpClient.PostAsync( "/query", content:httpContent))
             {
-                var poddResponse = new PoddResponse
-                {
-                    Data = responseMessage.Content
-                };
+                var poddResponse = new PoddResponse(responseMessage.Content);
 
                 return poddResponse;
             }

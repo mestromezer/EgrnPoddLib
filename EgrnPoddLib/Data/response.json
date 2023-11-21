@@ -1,0 +1,255 @@
+{
+  "created_at": "2023-11-21T08:23:16Z",
+  "query_id": "1ee88473-7d22-6ce0-ac06-cf9664c42b0d",
+  "meta": [
+    {
+      "name": "materials_material_code",
+      "type": "STRING"
+    },
+    {
+      "name": "materials_material_value",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_cad_number",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_realestate_type_code",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_realestate_type_value",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_address_note",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_fias",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_okato",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_kladr",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_postal_code",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_region_code",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_region_value",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_type_district",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_name_district",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_type_city",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_name_city",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_type_urban_district",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_name_urban_district",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_type_soviet_village",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_name_soviet_village",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_type_locality",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_name_locality",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_type_street",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_name_street",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_type_level1",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_name_level1",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_type_level2",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_name_level2",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_type_level3",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_name_level3",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_type_apartment",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_name_apartment",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_other_description_location",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_area_value",
+      "type": "DOUBLE"
+    },
+    {
+      "name": "realestates_purpose_code",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_purpose_code_value",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_name",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_total_floors",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_underground_floors",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_year_commisioning",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_year_build",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_land_included_cad_numbers",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_parent_cad_numbers",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_reg_number_okn",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_kind_object_code",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_kind_object_code_value",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_name_object",
+      "type": "STRING"
+    },
+    {
+      "name": "realestates_cancel_date",
+      "type": "DATE"
+    },
+    {
+      "name": "realestates_modify_date",
+      "type": "TIMESTAMP"
+    }
+  ],
+  "rows": [
+    [
+      null,
+      null,
+      "63:32:1603003:4963",
+      "002001001000",
+      "Земельный участок",
+      null,
+      null,
+      "36240863001",
+      "63022000053038300",
+      null,
+      "63",
+      "Самарская область",
+      "муниципальный р-н",
+      "Ставропольский",
+      "с/п",
+      "Ягодное",
+      null,
+      null,
+      null,
+      null,
+      "с",
+      "Ягодное",
+      "пер",
+      "6-й Дорогой",
+      "уч",
+      "5Г",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "Российская Федерация",
+      "364.0",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "\"63:32:1603003:5148\"",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "2023-03-25T06:18:12Z"
+    ]
+  ]
+}
