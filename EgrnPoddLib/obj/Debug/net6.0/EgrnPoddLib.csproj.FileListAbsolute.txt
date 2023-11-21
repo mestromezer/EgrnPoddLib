@@ -1,0 +1,4 @@
+C:\Users\globa\Documents\Самараинфоспутник\Смев4\EgrnLib\EgrnPoddLib\EgrnPoddLib\obj\Debug\net6.0\EgrnPoddLib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\globa\Documents\Самараинфоспутник\Смев4\EgrnLib\EgrnPoddLib\EgrnPoddLib\obj\Debug\net6.0\EgrnPoddLib.AssemblyInfoInputs.cache
+C:\Users\globa\Documents\Самараинфоспутник\Смев4\EgrnLib\EgrnPoddLib\EgrnPoddLib\obj\Debug\net6.0\EgrnPoddLib.AssemblyInfo.cs
+C:\Users\globa\Documents\Самараинфоспутник\Смев4\EgrnLib\EgrnPoddLib\EgrnPoddLib\obj\Debug\net6.0\EgrnPoddLib.csproj.CoreCompileInputs.cache
