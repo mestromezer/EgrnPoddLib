@@ -14,6 +14,7 @@ namespace EgrnPoddLib
             string endpointAddress = endpoint ?? _defaultEndpoint;
             var client = new HttpClient();
             client.BaseAddress = new Uri(endpointAddress);
+            client.Timeout = new TimeSpan(0,0,5);
 
             client.DefaultRequestHeaders.Add("Accept-Version", "1");
 
@@ -48,7 +49,8 @@ namespace EgrnPoddLib
 
             using (var responseMessage = await _httpClient.PostAsync( "/query", content:httpContent))
             {
-                var poddResponse = new PoddResponse(responseMessage.Content);
+                var poddResponseRow = await responseMessage.Content.ReadAsStringAsync();
+                var poddResponse = JsonConvert.DeserializeObject<PoddResponse>(poddResponseRow);
 
                 return poddResponse;
             }
