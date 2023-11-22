@@ -1,17 +1,11 @@
 ﻿using Newtonsoft.Json;
-using System.Data;
 using System.Globalization;
-using System.Net.Http.Headers;
-using System.Runtime.CompilerServices;
 
 namespace EgrnPoddLib.Data.JsonConverters
 {
     public class PoddResponseJsonConverter : Newtonsoft.Json.JsonConverter
     {
-        public override bool CanConvert(Type objectType)
-        {
-            throw new NotImplementedException();
-        }
+        public override bool CanConvert(Type objectType) => typeof(PoddResponse).FullName == objectType.FullName;
 
         public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
@@ -117,7 +111,7 @@ namespace EgrnPoddLib.Data.JsonConverters
                 var typeAsString = reader.Value;
                 switch (typeAsString)
                 {
-                    case "INTEGER":
+                    case "INTEGER": // Чтобы мой единственный запрос отработал)
                         item.ColumnType = typeof(int);
                         break;
                     case "STRING":
@@ -160,19 +154,6 @@ namespace EgrnPoddLib.Data.JsonConverters
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
-        }
-    }
-    class NotValidStructureOfPoddResponse: Exception
-    {
-        private const string startMessage = "Exception occured trying parse ";
-        public string message;
-        public NotValidStructureOfPoddResponse()
-        {
-            message = string.Concat(startMessage, "podd response");
-        }
-        public NotValidStructureOfPoddResponse(string node)
-        {
-            message = string.Concat(startMessage, node);
         }
     }
 }
