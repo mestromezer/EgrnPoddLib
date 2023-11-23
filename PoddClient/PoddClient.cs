@@ -29,13 +29,7 @@ namespace EgrnPoddLib.PoddClient
         }
         public async Task<SmevResponse> SendRequestAsync(string request)
         {
-            var requestBody = new requestForm
-            {
-                sql = new request
-                {
-                    sql = request,
-                }
-            };
+            var requestBody = new requestForm(new request(request));
             var stringPayload = JsonConvert.SerializeObject(requestBody);
 
             var httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
