@@ -1,4 +1,4 @@
-﻿namespace EgrnPoddLib.EgrnClient.Data.Holders
+﻿namespace EgrnPoddLib.EgrnClient.Data.RightWithHolders.Holders
 {
     public class RightHolderPublicFormation
     {

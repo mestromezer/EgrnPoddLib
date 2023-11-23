@@ -1,12 +1,15 @@
 ﻿using EgrnPoddLib.PoddClient.Data;
 using Newtonsoft.Json;
 using System.Globalization;
+using System.Text.Json;
+using System.Xml.Schema;
+using JsonException = Newtonsoft.Json.JsonException;
 
 namespace EgrnPoddLib.PoddClient.JsonConverters
 {
-    public class PoddResponseJsonConverter : JsonConverter<PoddResponse>
+    public class PoddResponseJsonConverter : JsonConverter<SmevResponse>
     {
-        public override PoddResponse? ReadJson(JsonReader reader, Type objectType, PoddResponse? existingValue, bool hasExistingValue, Newtonsoft.Json.JsonSerializer serializer)
+        /*public override PoddResponse? ReadJson(JsonReader reader, Type objectType, PoddResponse? existingValue, bool hasExistingValue, Newtonsoft.Json.JsonSerializer serializer)
 
         {
             reader.Read();// init -> created_at
@@ -33,6 +36,54 @@ namespace EgrnPoddLib.PoddClient.JsonConverters
                 Error = Error
             };
             return newbie;
+        }*/
+        public override SmevResponse? ReadJson(JsonReader reader, Type objectType, SmevResponse? existingValue, bool hasExistingValue, Newtonsoft.Json.JsonSerializer serializer)
+        {
+            if (reader.TokenType != JsonToken.StartObject)
+                throw new JsonException("Json должен содержать информацию об объекте");
+            var obj = new SmevResponse();
+            try
+            {
+                while (reader.Read())
+                {
+                    if (reader.TokenType == JsonToken.EndObject)
+                        return obj;
+                    if (reader.TokenType != JsonToken.PropertyName)
+                        continue;
+                    var propertyName = (string?)reader.Value;
+                    reader.Read();
+                    switch (propertyName)
+                    {
+                        case "created_at":
+                            obj.CreatedAt = (DateTime?)reader.Value;
+                            break;
+                        case "query_id":
+                            obj.QueryId = (string?)reader.Value;
+                            break;
+                        case "error":
+                            obj.IsSuccess = false;
+                            obj.Error = (string?)reader.Value;
+                            break;
+                        case "meta":
+                            if (reader.TokenType != JsonToken.StartArray)
+                                throw new JsonException("Элемент meta должен быть массивом");
+                            reader.Read();
+                            obj.MetaDataItems = parseMetaDataItems(reader);
+                            break;
+                        case "rows":
+                            if (reader.TokenType != JsonToken.StartArray)
+                                throw new JsonException("Элемент rows должен быть массивом");
+                            obj.Rows = parseRows(reader, obj.MetaDataItems);
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Error = $"Ошибка преобразования ответа: {ex.Message}";
+                obj.IsSuccess = false;
+            }
+            return obj;
         }
 
         private string? parseError(JsonReader reader)
@@ -42,13 +93,9 @@ namespace EgrnPoddLib.PoddClient.JsonConverters
             return (string)reader.Value;
         }
 
-        private List<Dictionary<string, object?>>? parseRows(JsonReader reader, List<MetaDataItem> MetaDataItems)
+        private List<Dictionary<string, object?>> parseRows(JsonReader reader, List<MetaDataItem> MetaDataItems)
         {
-            if (reader.Value as string != "rows") return null;
-
             var Rows = new List<Dictionary<string, object?>>();
-
-            reader.Read();
 
             while (reader.Read() && reader.TokenType != JsonToken.EndArray)
             {
@@ -87,19 +134,16 @@ namespace EgrnPoddLib.PoddClient.JsonConverters
 
         private List<MetaDataItem> parseMetaDataItems(JsonReader reader)
         {
-            if (reader.Value as string != "meta") return null;
             var MetaDataItems = new List<MetaDataItem>();
-            reader.Read(); // meta -> [
-            reader.Read(); // [ -> {
             while (reader.TokenType != JsonToken.EndArray)
             {
-
                 var item = new MetaDataItem();
 
                 reader.Read(); // { -> name
+
                 reader.Read(); // name -> value
 
-                item.ColumnName = (string)reader.Value;
+                item.ColumnName = (string?)reader.Value;
 
                 reader.Read(); // value -> type
                 reader.Read(); //type -> value
@@ -147,7 +191,7 @@ namespace EgrnPoddLib.PoddClient.JsonConverters
             return (DateTime)reader.Value;
         }
 
-        public override void WriteJson(JsonWriter writer, PoddResponse? value, Newtonsoft.Json.JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, SmevResponse? value, Newtonsoft.Json.JsonSerializer serializer)
         {
             throw new NotImplementedException("Сериализация данного класса не реализована");
         }

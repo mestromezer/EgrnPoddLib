@@ -2,7 +2,7 @@
 {
     public class MetaDataItem
     {
-        public string ColumnName { get; set; } = string.Empty;
+        public string? ColumnName { get; set; } = string.Empty;
         public Type? ColumnType { get; set; }
     }
 }

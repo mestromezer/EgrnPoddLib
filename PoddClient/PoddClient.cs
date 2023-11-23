@@ -27,7 +27,7 @@ namespace EgrnPoddLib.PoddClient
         {
             _httpClient = client;
         }
-        public async Task<PoddResponse> SendRequestAsync(string request)
+        public async Task<SmevResponse> SendRequestAsync(string request)
         {
             var requestBody = new requestForm
             {
@@ -44,7 +44,7 @@ namespace EgrnPoddLib.PoddClient
             using (var responseMessage = await _httpClient.PostAsync( "/query", content:httpContent))
             {
                 var poddResponseRow = await responseMessage.Content.ReadAsStringAsync();
-                var poddResponse = JsonConvert.DeserializeObject<PoddResponse>(poddResponseRow);
+                var poddResponse = JsonConvert.DeserializeObject<SmevResponse>(poddResponseRow);
 
                 return poddResponse;
             }

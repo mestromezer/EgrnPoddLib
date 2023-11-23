@@ -3,7 +3,7 @@
 namespace EgrnPoddLib.PoddClient.Data
 {
     [Newtonsoft.Json.JsonConverter(typeof(PoddResponseJsonConverter))]
-    public class PoddResponse
+    public class SmevResponse
     {
         public DateTime? CreatedAt { set; get; }
         public string? QueryId { set; get; }
