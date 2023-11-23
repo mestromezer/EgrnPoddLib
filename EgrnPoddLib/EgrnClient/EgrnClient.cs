@@ -7,7 +7,6 @@ namespace EgrnPoddLib.EgrnClient;
 public class EgrnClient
 {
     private PoddClient.PoddClient _poddClient;
-    public List<SmevResponse> PoddResponses { get; set; } = new();
     public EgrnClient()
     {
         _poddClient = new PoddClient.PoddClient();
