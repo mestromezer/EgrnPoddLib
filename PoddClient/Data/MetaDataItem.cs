@@ -1,4 +1,4 @@
-﻿namespace EgrnPoddLib.Data
+﻿namespace EgrnPoddLib.PoddClient.Data
 {
     public class MetaDataItem
     {

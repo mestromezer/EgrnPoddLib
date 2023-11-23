@@ -1,14 +1,13 @@
-﻿using EgrnPoddLib.Data;
+﻿using EgrnPoddLib.PoddClient.Data;
 using Newtonsoft.Json;
 using System.Globalization;
 
-namespace EgrnPoddLib.JsonConverters
+namespace EgrnPoddLib.PoddClient.JsonConverters
 {
-    public class PoddResponseJsonConverter : JsonConverter
+    public class PoddResponseJsonConverter : JsonConverter<PoddResponse>
     {
-        public override bool CanConvert(Type objectType) => typeof(PoddResponse).FullName == objectType.FullName;
+        public override PoddResponse? ReadJson(JsonReader reader, Type objectType, PoddResponse? existingValue, bool hasExistingValue, Newtonsoft.Json.JsonSerializer serializer)
 
-        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             reader.Read();// init -> created_at
             var CreatedAt = parseCreatedAt(reader);
@@ -18,10 +17,11 @@ namespace EgrnPoddLib.JsonConverters
             var MetaDataItems = parseMetaDataItems(reader);
             reader.Read(); // meta -> rows
             var Rows = parseRows(reader, MetaDataItems);
-            reader.Read(); // rows -> is_success
-            var IsSuccess = parseIsSuccess(reader);
-            reader.Read(); // is_success -> error
+            reader.Read(); // rows -> error
             var Error = parseError(reader);
+
+            bool IsSuccess = true;
+            if (Error is null) IsSuccess = false;
 
             var newbie = new PoddResponse()
             {
@@ -38,13 +38,8 @@ namespace EgrnPoddLib.JsonConverters
         private string? parseError(JsonReader reader)
         {
             if (reader.Value as string != "error") return null;
+            reader.Read();
             return (string)reader.Value;
-        }
-
-        private bool? parseIsSuccess(JsonReader reader)
-        {
-            if (reader.Value as string != "is_issues") return null;
-            return (bool)reader.Value;
         }
 
         private List<Dictionary<string, object?>>? parseRows(JsonReader reader, List<MetaDataItem> MetaDataItems)
@@ -152,9 +147,9 @@ namespace EgrnPoddLib.JsonConverters
             return (DateTime)reader.Value;
         }
 
-        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, PoddResponse? value, Newtonsoft.Json.JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Сериализация данного класса не реализована");
         }
     }
 }

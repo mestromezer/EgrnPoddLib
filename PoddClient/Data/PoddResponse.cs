@@ -1,6 +1,6 @@
-﻿using EgrnPoddLib.JsonConverters;
+﻿using EgrnPoddLib.PoddClient.JsonConverters;
 
-namespace EgrnPoddLib.Data
+namespace EgrnPoddLib.PoddClient.Data
 {
     [Newtonsoft.Json.JsonConverter(typeof(PoddResponseJsonConverter))]
     public class PoddResponse

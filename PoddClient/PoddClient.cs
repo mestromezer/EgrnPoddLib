@@ -1,8 +1,8 @@
-﻿using EgrnPoddLib.Data;
+﻿using EgrnPoddLib.PoddClient.Data;
 using Newtonsoft.Json;
 using System.Text;
 
-namespace EgrnPoddLib
+namespace EgrnPoddLib.PoddClient
 {
     public class PoddClient
     {
@@ -19,18 +19,13 @@ namespace EgrnPoddLib
 
             return client;
         }
-        public PoddClient(HttpClient? client, string? endpointAddress)
+        public PoddClient(string? endpointAddress=null) 
         {
-            if (client is not null)
-            {
-                if (endpointAddress is not null)
-                {
-                    _httpClient = client;
-                    _httpClient.BaseAddress = new Uri(endpointAddress);
-                }
-                else _httpClient = client; 
-            }
-            else _httpClient = CreateClient(endpointAddress);
+            _httpClient = CreateClient(endpointAddress);
+        }
+        public PoddClient(HttpClient client)
+        {
+            _httpClient = client;
         }
         public async Task<PoddResponse> SendRequestAsync(string request)
         {
