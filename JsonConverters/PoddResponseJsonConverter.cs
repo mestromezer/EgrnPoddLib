@@ -1,22 +1,23 @@
-﻿using Newtonsoft.Json;
+﻿using EgrnPoddLib.Data;
+using Newtonsoft.Json;
 using System.Globalization;
 
-namespace EgrnPoddLib.Data.JsonConverters
+namespace EgrnPoddLib.JsonConverters
 {
-    public class PoddResponseJsonConverter : Newtonsoft.Json.JsonConverter
+    public class PoddResponseJsonConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType) => typeof(PoddResponse).FullName == objectType.FullName;
 
         public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             reader.Read();// init -> created_at
-            var CreatedAt = parseCreatedAt(ref reader);
+            var CreatedAt = parseCreatedAt(reader);
             reader.Read();// created_at -> query_id
-            var QueryId = parseQueryId(ref reader);
+            var QueryId = parseQueryId(reader);
             reader.Read();// query_id -> meta
-            var MetaDataItems = parseMetaDataItems(ref reader);
+            var MetaDataItems = parseMetaDataItems(reader);
             reader.Read(); // meta -> rows
-            var Rows = parseRows(ref reader, MetaDataItems);
+            var Rows = parseRows(reader, MetaDataItems);
             reader.Read(); // rows -> is_success
             var IsSuccess = parseIsSuccess(reader);
             reader.Read(); // is_success -> error
@@ -46,7 +47,7 @@ namespace EgrnPoddLib.Data.JsonConverters
             return (bool)reader.Value;
         }
 
-        private List<Dictionary<string, object?>>? parseRows(ref JsonReader reader, List<MetaDataItem> MetaDataItems)
+        private List<Dictionary<string, object?>>? parseRows(JsonReader reader, List<MetaDataItem> MetaDataItems)
         {
             if (reader.Value as string != "rows") return null;
 
@@ -67,7 +68,7 @@ namespace EgrnPoddLib.Data.JsonConverters
                         name = it.Current.ColumnName;
                         type = Type.GetType(it.Current.ColumnType.FullName);
                     }
-                    catch (NullReferenceException ex) 
+                    catch (NullReferenceException ex)
                     {
                         // логгер?
                         throw ex;
@@ -89,7 +90,7 @@ namespace EgrnPoddLib.Data.JsonConverters
             return Rows;
         }
 
-        private List<MetaDataItem> parseMetaDataItems(ref JsonReader reader)
+        private List<MetaDataItem> parseMetaDataItems(JsonReader reader)
         {
             if (reader.Value as string != "meta") return null;
             var MetaDataItems = new List<MetaDataItem>();
@@ -111,9 +112,9 @@ namespace EgrnPoddLib.Data.JsonConverters
                 var typeAsString = reader.Value;
                 switch (typeAsString)
                 {
-                    case "INTEGER": // Чтобы мой единственный запрос отработал)
-                        item.ColumnType = typeof(int);
-                        break;
+                    //case "INTEGER": // Чтобы мой единственный запрос отработал)
+                    //    item.ColumnType = typeof(int);
+                    //    break;
                     case "STRING":
                         item.ColumnType = typeof(string);
                         break;
@@ -137,14 +138,14 @@ namespace EgrnPoddLib.Data.JsonConverters
             return MetaDataItems;
         }
 
-        private string parseQueryId(ref JsonReader reader)
+        private string parseQueryId(JsonReader reader)
         {
             if (reader.Value as string != "query_id") return null;
             reader.Read();
             return (string)reader.Value;
         }
 
-        private DateTime? parseCreatedAt(ref JsonReader reader)
+        private DateTime? parseCreatedAt(JsonReader reader)
         {
             if (reader.Value as string != "created_at") return null;
             reader.Read();

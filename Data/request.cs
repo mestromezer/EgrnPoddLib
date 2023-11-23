@@ -1,4 +1,4 @@
-﻿namespace EgrnPoddLib.Data.RequestBody
+﻿namespace EgrnPoddLib.Data
 {
     public class request
     {
@@ -8,4 +8,11 @@
     {
         public request sql { get; set; }
     }
+    /*
+    *{
+    *    "sql":{
+    *        "sql": "requestQuery"
+    *    }
+    *}
+    */
 }

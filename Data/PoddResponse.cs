@@ -1,4 +1,4 @@
-﻿using EgrnPoddLib.Data.JsonConverters;
+﻿using EgrnPoddLib.JsonConverters;
 
 namespace EgrnPoddLib.Data
 {
