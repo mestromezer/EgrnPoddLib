@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EgrnPoddLib.PoddClient
 {
-    public class PoddClient
+    public class PoddClient: IDisposable
     {
         private readonly HttpClient _httpClient;
         public PoddClient(string? endpointAddress=null) 
@@ -17,9 +17,12 @@ namespace EgrnPoddLib.PoddClient
         {
             _httpClient = client;
         }
+
+        public void Dispose()=>_httpClient?.Dispose();
+
         public async Task<SmevResponse> SendRequest(string request)
         {
-            var requestBody = new requestForm(new request(request));
+            var requestBody = new RequestFrom(new Request(request));
             var stringPayload = JsonConvert.SerializeObject(requestBody);
 
             var httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
@@ -30,7 +33,7 @@ namespace EgrnPoddLib.PoddClient
                 var poddResponseRow = await responseMessage.Content.ReadAsStringAsync();
                 var poddResponse = JsonConvert.DeserializeObject<SmevResponse>(poddResponseRow);
 
-                return poddResponse;
+                return poddResponse??throw new NullReferenceException("poddResponse был null");
             }
         }
     }

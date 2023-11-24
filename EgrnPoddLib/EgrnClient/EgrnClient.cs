@@ -1,8 +1,6 @@
 ﻿using EgrnPoddLib.EgrnClient.Data;
 using EgrnPoddLib.EgrnClient.Data.RightWithHoldersRequest;
 using EgrnPoddLib.EgrnClient.Processors;
-using EgrnPoddLib.PoddClient.Data;
-using System.Net.Http;
 
 namespace EgrnPoddLib.EgrnClient;
 public class EgrnClient
@@ -20,27 +18,27 @@ public class EgrnClient
     {
         _poddClient = new PoddClient.PoddClient();
     }
-    public async Task<RightWithHoldersResult> GetRightWithHolders(string CadNumber)
+    public async Task<RightWithHoldersResult> GetRightWithHolders(string cadNumber)
     {
-        var poddResponse = await _poddClient.SendRequest($"SELECT * FROM egrn2.1.1.getrightwithholders(\"{CadNumber}\")");
+        var PoddResponse = await _poddClient.SendRequest($"SELECT * FROM egrn2.1.1.getrightwithholders(\"{cadNumber}\")");
 
-        var requestInfo = new SmevRequestInfo
+        var RequestInfo = new SmevRequestInfo
         {
-            CreatedAt = poddResponse.CreatedAt,
-            QueryId = poddResponse.QueryId,
-            IsSuccess = poddResponse.IsSuccess,
-            Error = poddResponse.Error
+            CreatedAt = PoddResponse.CreatedAt,
+            QueryId = PoddResponse.QueryId,
+            IsSuccess = PoddResponse.IsSuccess,
+            Error = PoddResponse.Error
         };
-        var cadNumber = (string?)poddResponse.Rows[0]["realestates_cad_number"];
+        var СadNumberFromResponse = (string?)PoddResponse.Rows[0]["realestates_cad_number"];
 
-        var rights = GetRightWithHoldersProcessor.GetRights(poddResponse);
+        var Rights = GetRightWithHoldersProcessor.GetRights(PoddResponse);
 
-        var rightWithHoldersResult = new RightWithHoldersResult()
+        var RightWithHoldersResult = new RightWithHoldersResult()
         {
-            RequestInfo = requestInfo,
-            CadNumber = cadNumber,
-            Rights = rights
+            RequestInfo = RequestInfo,
+            CadNumber = СadNumberFromResponse,
+            Rights = Rights
         };
-        return rightWithHoldersResult;
+        return RightWithHoldersResult;
     }
 }

@@ -131,7 +131,7 @@ public class PoddResponseJsonConverter : JsonConverter<SmevResponse>
                 default:
                     throw new Exception("Невалидное значение type в meta");
             }
-            var item = new MetaDataItem(ColumnName:ColumnName, ColumnType:ColumnType);
+            var item = new MetaDataItem(columnName:ColumnName, columnType:ColumnType);
             reader.Read(); // value -> }
             reader.Read(); // } -> {
             MetaDataItems.Add(item);
