@@ -1,6 +1,8 @@
 ﻿using EgrnPoddLib.EgrnClient.Data;
 using EgrnPoddLib.EgrnClient.Data.RightWithHoldersRequest;
 using EgrnPoddLib.EgrnClient.Processors;
+using EgrnPoddLib.PoddClient.Data;
+using Newtonsoft.Json;
 
 namespace EgrnPoddLib.EgrnClient;
 public class EgrnClient
@@ -21,6 +23,29 @@ public class EgrnClient
     public async Task<RightWithHoldersResult> GetRightWithHolders(string cadNumber)
     {
         var PoddResponse = await _poddClient.SendRequest($"SELECT * FROM egrn2.1.1.getrightwithholders(\"{cadNumber}\")");
+
+        var RequestInfo = new SmevRequestInfo
+        {
+            CreatedAt = PoddResponse.CreatedAt,
+            QueryId = PoddResponse.QueryId,
+            IsSuccess = PoddResponse.IsSuccess,
+            Error = PoddResponse.Error
+        };
+        var СadNumberFromResponse = (string?)PoddResponse.Rows[0]["realestates_cad_number"];
+
+        var Rights = GetRightWithHoldersProcessor.GetRights(PoddResponse);
+
+        var RightWithHoldersResult = new RightWithHoldersResult()
+        {
+            RequestInfo = RequestInfo,
+            CadNumber = СadNumberFromResponse,
+            Rights = Rights
+        };
+        return RightWithHoldersResult;
+    }
+    public RightWithHoldersResult TESTGetRightWithHolders(string rawData)
+    {
+        var PoddResponse = JsonConvert.DeserializeObject<SmevResponse>(rawData);
 
         var RequestInfo = new SmevRequestInfo
         {

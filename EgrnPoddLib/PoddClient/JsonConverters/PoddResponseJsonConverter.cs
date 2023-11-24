@@ -55,38 +55,33 @@ public class PoddResponseJsonConverter : JsonConverter<SmevResponse>
         }
         return obj;
     }
-    private List<Dictionary<string, object?>> parseRows(JsonReader reader, List<MetaDataItem> MetaDataItems)
+    private List<Dictionary<string, object?>> parseRows(JsonReader reader, List<MetaDataItem> metaDataItems)
     {
         var Rows = new List<Dictionary<string, object?>>();
 
         while (reader.Read() && reader.TokenType != JsonToken.EndArray)
         {
-            var it = MetaDataItems.GetEnumerator();
-            var row = new Dictionary<string, object?>();
+            var it = metaDataItems.GetEnumerator(); // Итерируемся по метаданным
+            var row = new Dictionary<string, object?>(); // Записываем пары атрибута в подд / зничение
             while (reader.Read() && reader.TokenType != JsonToken.EndArray && it.MoveNext())
             {
-                string name; // Name of type in PODD specification
-                Type type; // Type inside C#
+                string name = string.Empty;
+                Type type = default; // Type inside C#
                 try
                 {
                     name = it.Current.ColumnName;
-                    type = it.Current.ColumnType.FullName != null ? Type.GetType(it.Current.ColumnType.FullName):default;
+                    var TypeFullName = it.Current.ColumnType.FullName;
+                    if (TypeFullName == null) throw new NullReferenceException("TypeFullName was null");
+                    type = Type.GetType(TypeFullName);
                 }
                 catch (NullReferenceException ex)
                 {
-                    // логгер?
                     throw ex;
                 }
-                object value;
-                if (type.FullName != "System.Double") value = Convert.ChangeType(reader.Value, type);
-                else
-                {
-                    if (reader.Value != null)
-                    {
-                        value = double.Parse((string)reader.Value, CultureInfo.InvariantCulture);
-                    }
-                    else value = null;
-                }
+
+                object value; // Значение ячейки
+                if (reader.Value == null) { row[name] = null; continue; } // В ячейке null
+                value = Convert.ChangeType(reader.Value, type); // Было значение
                 row[name] = value;
             }
             Rows.Add(row);
@@ -118,6 +113,9 @@ public class PoddResponseJsonConverter : JsonConverter<SmevResponse>
                     break;
                 case "STRING":
                     ColumnType = typeof(string);
+                    break;
+                case "LONG":
+                    ColumnType = typeof(long);
                     break;
                 case "DOUBLE":
                     ColumnType = typeof(double);
