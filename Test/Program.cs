@@ -1,9 +1,4 @@
 ﻿using EgrnPoddLib.EgrnClient;
-using EgrnPoddLib.Fatcories;
-using EgrnPoddLib.PoddClient;
-using EgrnPoddLib.PoddClient.Data;
-using Newtonsoft.Json;
-using System.Net.WebSockets;
 
 /* Тест для PoddResponseJsonConverter
 var q = File.ReadAllText(@"C:\Users\globa\Downloads\data.json");
@@ -18,7 +13,7 @@ var response = await poddClient.SendRequest("select 1");
 Console.WriteLine(response.IsSuccess);
 Console.WriteLine(response.Rows[0]["EXPR$0"]);*/
 
-/*var q = File.ReadAllText(@"C:\Users\globa\Desktop\response.json");
+var q = File.ReadAllText(@"C:\Users\globa\Desktop\response.json");
 var EgrnClient = new EgrnClient();
 var result = EgrnClient.TESTGetRightWithHolders(q);
 //Console.WriteLine(result.RequestInfo.IsSuccess);
@@ -27,12 +22,10 @@ var result = EgrnClient.TESTGetRightWithHolders(q);
 //Console.WriteLine(result.Rights[1].RightTypeValue);
 foreach (var right in result.Rights)
 {
-    Console.Write(right.RightNumber + ' ' + right.RegistrationDate + ' ' + right.RightTypeValue +'\n');
+    Console.Write(right.RightNumber + ' ' + right.RegistrationDate + ' ' + right.RightTypeValue + ' ' + right.RightTypeValueCode + '\n');
     foreach (var ind in right.Individuals)
     {
-        Console.Write(ind.FristName+' ');
-        Console.Write(ind.Surname+' ');
-        Console.WriteLine(ind.Patronymic + ' ');
+        Console.WriteLine(ind.FullName);
     }
     foreach (var pf in right.PublicFormations)
     {
@@ -43,4 +36,4 @@ foreach (var right in result.Rights)
     {
         Console.Write(le.FullName + ' ');
     }
-}*/
+}

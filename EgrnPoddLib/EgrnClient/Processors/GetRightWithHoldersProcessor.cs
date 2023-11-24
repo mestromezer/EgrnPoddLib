@@ -8,6 +8,11 @@ public static class GetRightWithHoldersProcessor
     public static RightHolderIndividual GetHolderIndividual(Dictionary<string, object?> row)
         => new RightHolderIndividual()
         {
+            FullName = 
+            (string?)row["right_holder_individuals_surname"] + ' ' +
+            (string?)row["right_holder_individuals_first_name"] + ' ' +
+            (string?)row["right_holder_individuals_patronymic"],
+
             Surname = (string?)row["right_holder_individuals_surname"],
             FristName = (string?)row["right_holder_individuals_first_name"],
             Patronymic = (string?)row["right_holder_individuals_patronymic"],

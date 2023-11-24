@@ -1,6 +1,7 @@
 ﻿namespace EgrnPoddLib.EgrnClient.Data.RightWithHolders.Holders;
 public class RightHolderIndividual
 {
+    public string? FullName { get; set; }
     public string? Surname { get; set; }
     public string? FristName { get; set; }
     public string? Patronymic { get; set; }
