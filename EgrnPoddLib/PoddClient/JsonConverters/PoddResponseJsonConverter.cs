@@ -10,7 +10,8 @@ public class PoddResponseJsonConverter : JsonConverter<SmevResponse>
     {
         if (reader.TokenType != JsonToken.StartObject)
             throw new JsonException("Json должен содержать информацию об объекте");
-        var obj = new SmevResponse();
+        var obj = new SmevResponse()
+        { IsSuccess = true};
         try
         {
             while (reader.Read())
@@ -112,9 +113,9 @@ public class PoddResponseJsonConverter : JsonConverter<SmevResponse>
             var typeAsString = reader.Value;
             switch (typeAsString)
             {
-                //case "INTEGER": // Чтобы мой единственный запрос отработал)
-                //    item.ColumnType = typeof(int);
-                //    break;
+                case "INTEGER": // Чтобы мой единственный запрос отработал)
+                    ColumnType = typeof(int);
+                    break;
                 case "STRING":
                     ColumnType = typeof(string);
                     break;

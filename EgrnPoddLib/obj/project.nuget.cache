@@ -1,10 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "V5XukoxPx8Pk7rL+4L0gyAgvpR2RMbzlbaOmsWl5q9NjDn9OZg3LwKzktFVGfrxqD5R/OpEa9UAQpl++E9nkdQ==",
+  "dgSpecHash": "RxB/IumlGuXXoAFdjnP9cuNZ1sMwlk06vey4DdaisUTTrDVCnsUYSkBGWXosEA5Vpw3EQ8jx+LKKQfJHK0i8Ng==",
   "success": true,
   "projectFilePath": "C:\\Users\\globa\\Documents\\Самараинфоспутник\\Смев4\\EgrnLib\\EgrnPoddLib\\EgrnPoddLib\\EgrnPoddLib.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\globa\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\globa\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\globa\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "C:\\Users\\globa\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\globa\\.nuget\\packages\\microsoft.extensions.http\\8.0.0\\microsoft.extensions.http.8.0.0.nupkg.sha512",
+    "C:\\Users\\globa\\.nuget\\packages\\microsoft.extensions.logging\\8.0.0\\microsoft.extensions.logging.8.0.0.nupkg.sha512",
+    "C:\\Users\\globa\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\globa\\.nuget\\packages\\microsoft.extensions.options\\8.0.0\\microsoft.extensions.options.8.0.0.nupkg.sha512",
+    "C:\\Users\\globa\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "C:\\Users\\globa\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\globa\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }
