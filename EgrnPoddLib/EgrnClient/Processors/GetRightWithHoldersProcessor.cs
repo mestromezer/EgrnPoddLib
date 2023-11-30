@@ -25,8 +25,8 @@ public static class GetRightWithHoldersProcessor
             DocumentDate = (DateTime?)row["right_holder_individuals_document_date"],
             DocumentIssuer = (string?)row["right_holder_individuals_document_issuer"]
         };
-    public static RightHolderLegacyEntity GetHolderLegacyEntity(Dictionary<string, object?> row)
-        => new RightHolderLegacyEntity()
+    public static RightHolderLegacyEntity GetHolderLegacyEntity(Dictionary<string, object?> row)=>
+        new RightHolderLegacyEntity()
         {
             FullName = (string?)row["right_holder_legacy_entities_full_name"],
             Inn = (string?)row["right_holder_legacy_entities_inn"],
@@ -87,7 +87,14 @@ public static class GetRightWithHoldersProcessor
             right.Individuals.Add(GetHolderIndividual(row));
             right.LegacyEntities.Add(GetHolderLegacyEntity(row));
             right.PublicFormations.Add(GetHolderRightHolderPublicFormation(row));
+            Filter(right);
         }
         return rights;
+    }
+    static private void Filter(RightWithHolders right)
+    {
+        right.Individuals.RemoveAll(ind => ind.FullName is not string);
+        right.LegacyEntities.RemoveAll(le => le.FullName == null && le.Inn == null && le.Ogrn == null);
+        right.PublicFormations.RemoveAll(pf => pf.MunicipalityName is not string);
     }
 }
